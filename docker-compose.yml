@@ -1,0 +1,66 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: todo-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root123
+      MYSQL_DATABASE: todo_db
+      MYSQL_USER: todo_user
+      MYSQL_PASSWORD: todo_pass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: todo-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: .
+    container_name: todo-api
+    restart: always
+    depends_on:
+      mysql:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    environment:
+      # 容器内必须用服务名访问中间件，保留在此处覆盖 .env
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_USER=todo_user
+      - DB_PASSWORD=todo_pass
+      - DB_NAME=todo_db
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    # 统一读取本地 .env 文件，保证 SECRET_KEY 等配置与本地环境完全一致
+    env_file:
+      - .env
+    volumes:
+      - ./:/app
+    command: >
+      sh -c "
+        alembic upgrade head &&
+        uvicorn main:app --host 0.0.0.0 --port 8000
+      "
+
+volumes:
+  mysql_data:
+  redis_data:
