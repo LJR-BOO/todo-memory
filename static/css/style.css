@@ -10,8 +10,8 @@
   --muted: #b08ba6;
   --blue: #b89bec;         /* 淡紫 链接 */
   --danger: #e57c9a;
-  --card: rgba(255, 255, 255, 0.5);
-  --shadow: 0 10px 30px rgba(255, 158, 196, 0.2);
+  --card: rgba(255, 255, 255, 0.2);
+  --shadow: 0 10px 30px rgba(255, 158, 196, 0.16);
   --radius: 20px;
 }
 
@@ -41,8 +41,8 @@ body.bg-login {
   --muted: #9c8870;
   --blue: #8a6f45;
   --danger: #c98a6a;
-  --card: rgba(255, 251, 242, 0.5);
-  --shadow: 0 10px 30px rgba(150, 110, 60, 0.18);
+  --card: rgba(255, 251, 242, 0.2);
+  --shadow: 0 10px 30px rgba(150, 110, 60, 0.12);
 }
 /* 登录后（待办页）背景图 —— 柔和茶绿，贴合 todo_bg.jpg 的 #AAB794 主色 */
 body.bg-todo {
@@ -57,8 +57,8 @@ body.bg-todo {
   --muted: #8a9378;
   --blue: #767f5d;
   --danger: #c19a77;
-  --card: rgba(251, 251, 244, 0.5);
-  --shadow: 0 10px 30px rgba(110, 130, 100, 0.18);
+  --card: rgba(251, 251, 244, 0.2);
+  --shadow: 0 10px 30px rgba(110, 130, 100, 0.12);
 }
 
 h1, h2, .hero-title, .auth-title, .todo-list-title {
@@ -117,7 +117,17 @@ a:hover { text-decoration: underline; }
 
 /* ---------- 布局 ---------- */
 .page { max-width: 1080px; margin: 0 auto; padding: 24px 16px 60px; position: relative; }
-.footer { text-align: center; color: var(--muted); padding: 20px; font-size: 13px; }
+.footer { text-align: center; padding: 24px 16px 40px; }
+.footer-title {
+  font-family: "Noto Serif SC", "SimSun", serif;
+  font-size: 26px; letter-spacing: 6px; margin-bottom: 16px;
+  color: var(--ink-strong);
+}
+.footer-img {
+  max-width: 360px; width: 90%; height: auto;
+  border-radius: 16px; border: 1px solid var(--gold-border);
+  box-shadow: var(--shadow); opacity: 0.92;
+}
 
 /* ---------- 卡片 ---------- */
 .card {
