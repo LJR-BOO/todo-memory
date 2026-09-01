@@ -159,11 +159,11 @@ a:hover { text-decoration: underline; }
 .field-label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
 .input, .field input {
   width: 100%; padding: 11px 14px; font-size: 15px;
-  /* 边框透明，让背景图透出；聚焦时才出现边框 */
-  border: 1px solid transparent; border-radius: 10px;
-  background: rgba(255,255,255,0.35); color: var(--ink); outline: none;
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
+  /* 半透明毛玻璃：淡淡浅色轮廓，能透出背景动漫图；聚焦时浮现金色边框 */
+  border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 10px;
+  background: rgba(255, 255, 255, 0.4); color: var(--ink); outline: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   transition: border-color .2s, box-shadow .2s;
 }
 .input:focus, .field input:focus {
