@@ -124,15 +124,15 @@ a:hover { text-decoration: underline; }
   color: var(--ink-strong);
 }
 .footer-img {
-  max-width: 360px; width: 90%; height: auto;
-  border-radius: 16px; border: 1px solid var(--gold-border);
-  box-shadow: var(--shadow); opacity: 0.92;
+  max-width: 420px; width: 92%; height: auto;
+  opacity: 0.95;
 }
 
 /* ---------- 卡片 ---------- */
 .card {
   background: var(--card);
-  border: 1px solid var(--gold-border);
+  /* 边框透明，让背景图直接透出；靠磨砂模糊+阴影界定卡片 */
+  border: 1px solid transparent;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   backdrop-filter: blur(16px) saturate(1.25);
