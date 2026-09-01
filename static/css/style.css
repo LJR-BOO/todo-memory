@@ -20,12 +20,45 @@
 body {
   font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
   color: var(--ink);
-  /* 丰富可爱的粉 → 淡紫 → 薄荷 → 奶油 对角渐变 */
+  /* 默认兜底渐变（JS 给 body 加 bg-login / bg-todo 后会被背景图覆盖） */
   background: linear-gradient(160deg,
     #fff0f6 0%, #ffe9f3 22%, #f6e9ff 48%,
     #eaf3ff 72%, #fff5fa 100%);
   background-attachment: fixed;
   min-height: 100vh;
+}
+/* 登录页背景图（暖金棕调，贴合 login_bg.jpg 的 #B19160 主色） */
+body.bg-login {
+  background:
+    linear-gradient(160deg, rgba(255, 247, 235, 0.6) 0%, rgba(253, 236, 213, 0.38) 45%, rgba(248, 231, 214, 0.55) 100%),
+    url("/static/images/login_bg.jpg") center/cover fixed no-repeat;
+  /* 登录主题色 —— 温暖金棕 */
+  --gold: #c99a5b;
+  --gold-deep: #b8843f;
+  --gold-border: rgba(191, 142, 78, 0.5);
+  --ink: #6b5440;
+  --ink-strong: #4a3a2c;
+  --muted: #9c8870;
+  --blue: #8a6f45;
+  --danger: #c98a6a;
+  --card: rgba(255, 251, 242, 0.85);
+  --shadow: 0 10px 30px rgba(150, 110, 60, 0.22);
+}
+/* 登录后（待办页）背景图 —— 柔和茶绿，贴合 todo_bg.jpg 的 #AAB794 主色 */
+body.bg-todo {
+  background:
+    linear-gradient(160deg, rgba(245, 248, 239, 0.6) 0%, rgba(236, 244, 228, 0.38) 45%, rgba(240, 247, 235, 0.55) 100%),
+    url("/static/images/todo_bg.jpg") center/cover fixed no-repeat;
+  --gold: #8fb08a;
+  --gold-deep: #6f9368;
+  --gold-border: rgba(124, 160, 112, 0.5);
+  --ink: #56614b;
+  --ink-strong: #3b4534;
+  --muted: #8a9378;
+  --blue: #767f5d;
+  --danger: #c19a77;
+  --card: rgba(251, 251, 244, 0.85);
+  --shadow: 0 10px 30px rgba(110, 130, 100, 0.22);
 }
 
 h1, h2, .hero-title, .auth-title, .todo-list-title {
@@ -40,7 +73,7 @@ a:hover { text-decoration: underline; }
 .petals { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
 .petal {
   position: absolute; top: -8vh;
-  background: linear-gradient(135deg, #ffd9e9, #ff9ec4);
+  background: linear-gradient(135deg, #ffe3cf, #f4c9a6);
   border-radius: 60% 0 60% 60%;
   opacity: 0;
   animation: petalFall linear infinite;
@@ -55,10 +88,9 @@ a:hover { text-decoration: underline; }
 /* ---------- 顶部横幅 ---------- */
 .hero {
   position: relative;
-  height: 240px;
-  background:
-    linear-gradient(180deg, rgba(255, 233, 243, 0.25), rgba(253, 243, 247, 0.6) 60%, var(--bg)),
-    url("/static/images/banner.jpg") center/cover no-repeat;
+  height: 220px;
+  /* 不再自带背景图，改为半透明文字遮罩，让 body 层背景图透出来 */
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0.05) 70%, transparent);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -66,16 +98,16 @@ a:hover { text-decoration: underline; }
 }
 .hero-overlay {
   position: absolute; inset: 0;
-  background: radial-gradient(ellipse at center, rgba(255,255,255,0.2), rgba(244,132,183,0.18));
+  background: radial-gradient(ellipse at center, rgba(255,255,255,0.2), transparent 70%);
 }
 .hero-content { position: relative; text-align: center; z-index: 2; }
 .hero-title {
   font-size: 44px; font-weight: 700; letter-spacing: 6px;
-  color: #fff; text-shadow: 0 2px 16px rgba(244, 132, 183, 0.6);
+  color: #fff; text-shadow: 0 2px 16px rgba(70, 50, 35, 0.55);
 }
 .hero-subtitle {
-  margin-top: 10px; color: #ffeef6; letter-spacing: 3px;
-  text-shadow: 0 1px 8px rgba(244, 132, 183, 0.5);
+  margin-top: 10px; color: #fff; letter-spacing: 3px;
+  text-shadow: 0 1px 8px rgba(70, 50, 35, 0.5);
 }
 .star { position: absolute; color: var(--gold); font-size: 22px; opacity: 0.7; animation: twinkle 3s ease-in-out infinite; }
 .star1 { top: 40px; left: 12%; }
@@ -93,7 +125,7 @@ a:hover { text-decoration: underline; }
   border: 1px solid var(--gold-border);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(12px);
 }
 
 /* ---------- 认证视图 ---------- */

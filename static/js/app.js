@@ -44,6 +44,8 @@
   function showView(name) {
     $id('view-auth').classList.toggle('hidden', name !== 'auth');
     $id('view-todo').classList.toggle('hidden', name !== 'todo');
+    // 切换背景图：登录页 / 待办页 各用一张
+    document.body.className = name === 'todo' ? 'bg-todo' : 'bg-login';
   }
   window.api.onUnauthorized = function () {
     showView('auth');
