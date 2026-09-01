@@ -23,6 +23,24 @@
   }
 
   /* ---------- 视图切换 ---------- */
+  function spawnPetals() {
+    const box = $id('petals');
+    if (!box) return;
+    const count = 16;
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('div');
+      p.className = 'petal';
+      const size = 8 + Math.random() * 10;
+      const dur = 9 + Math.random() * 9;
+      p.style.left = (Math.random() * 100) + 'vw';
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.animationDuration = dur + 's';
+      p.style.animationDelay = (-Math.random() * dur) + 's';
+      box.appendChild(p);
+    }
+  }
+
   function showView(name) {
     $id('view-auth').classList.toggle('hidden', name !== 'auth');
     $id('view-todo').classList.toggle('hidden', name !== 'todo');
@@ -222,6 +240,7 @@
 
   /* ---------- 初始化 ---------- */
   function init() {
+    spawnPetals();
     bindAuth();
     bindTodo();
     if (api.getToken()) {

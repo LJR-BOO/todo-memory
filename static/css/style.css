@@ -20,7 +20,11 @@
 body {
   font-family: "Noto Sans SC", "Microsoft YaHei", sans-serif;
   color: var(--ink);
-  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+  /* 丰富可爱的粉 → 淡紫 → 薄荷 → 奶油 对角渐变 */
+  background: linear-gradient(160deg,
+    #fff0f6 0%, #ffe9f3 22%, #f6e9ff 48%,
+    #eaf3ff 72%, #fff5fa 100%);
+  background-attachment: fixed;
   min-height: 100vh;
 }
 
@@ -31,6 +35,22 @@ h1, h2, .hero-title, .auth-title, .todo-list-title {
 .hidden { display: none !important; }
 a { color: var(--blue); text-decoration: none; }
 a:hover { text-decoration: underline; }
+
+/* ---------- 飘落花瓣 ---------- */
+.petals { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+.petal {
+  position: absolute; top: -8vh;
+  background: linear-gradient(135deg, #ffd9e9, #ff9ec4);
+  border-radius: 60% 0 60% 60%;
+  opacity: 0;
+  animation: petalFall linear infinite;
+}
+@keyframes petalFall {
+  0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+  8%   { opacity: 0.85; }
+  50%  { transform: translateY(52vh) translateX(34px) rotate(200deg); opacity: 0.8; }
+  100% { transform: translateY(112vh) translateX(-24px) rotate(380deg); opacity: 0; }
+}
 
 /* ---------- 顶部横幅 ---------- */
 .hero {
