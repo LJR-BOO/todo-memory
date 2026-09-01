@@ -13,6 +13,8 @@
   --card: rgba(255, 255, 255, 0.2);
   --shadow: 0 10px 30px rgba(255, 158, 196, 0.16);
   --radius: 20px;
+  /* 磨砂玻璃边框透明度（0 隐形 ~ 0.8 明显），由底部滑块实时调节 */
+  --frame-border-alpha: 0.35;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -131,8 +133,8 @@ a:hover { text-decoration: underline; }
 /* ---------- 卡片 ---------- */
 .card {
   background: var(--card);
-  /* 边框透明 + 去阴影，让背景图直接透出；仅靠磨砂模糊界定卡片 */
-  border: 1px solid transparent;
+  /* 磨砂玻璃边框透明度可调（底部滑块），默认 0.35 隐约可见 */
+  border: 1px solid rgb(255 255 255 / var(--frame-border-alpha));
   border-radius: var(--radius);
   box-shadow: none;
   backdrop-filter: blur(16px) saturate(1.25);
@@ -159,8 +161,8 @@ a:hover { text-decoration: underline; }
 .field-label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
 .input, .field input {
   width: 100%; padding: 11px 14px; font-size: 15px;
-  /* 半透明毛玻璃：淡淡浅色轮廓，能透出背景动漫图；聚焦时浮现金色边框 */
-  border: 1px solid rgba(255, 255, 255, 0.5); border-radius: 10px;
+  /* 半透明毛玻璃：边框透明度可调（底部滑块），能透出背景动漫图；聚焦时浮现金色边框 */
+  border: 1px solid rgb(255 255 255 / var(--frame-border-alpha)); border-radius: 10px;
   background: rgba(255, 255, 255, 0.4); color: var(--ink); outline: none;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -239,6 +241,22 @@ a:hover { text-decoration: underline; }
 .empty { text-align: center; color: var(--muted); padding: 24px; }
 .pagination { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 16px; }
 .page-info { color: var(--muted); font-size: 14px; }
+
+/* ---------- 边框透明度调节滑条 ---------- */
+.glass-control {
+  position: fixed; bottom: 20px; left: 20px; z-index: 50;
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border-radius: 12px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgb(255 255 255 / 0.6);
+  font-size: 13px; color: var(--ink);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+.gc-label { color: var(--muted); white-space: nowrap; }
+.glass-control input[type="range"] { width: 130px; accent-color: var(--gold); cursor: pointer; }
+.gc-val { min-width: 38px; text-align: right; color: var(--ink-strong); font-weight: 600; }
 
 /* ---------- 提示 ---------- */
 .toast {

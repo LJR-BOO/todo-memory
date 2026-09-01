@@ -109,6 +109,13 @@
     <img src="/static/images/footer_icons.jpg" alt="七元素" class="footer-img" loading="lazy">
   </footer>
 
+  <!-- 边框透明度调节滑块 -->
+  <div class="glass-control" id="glassControl">
+    <label class="gc-label" for="borderAlpha">边框透明度</label>
+    <input type="range" id="borderAlpha" min="0" max="0.8" step="0.05" value="0.35">
+    <span class="gc-val" id="borderAlphaVal">35%</span>
+  </div>
+
   <div id="toast" class="toast hidden"></div>
 
   <script src="/static/js/api.js"></script>

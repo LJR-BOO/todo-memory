@@ -112,6 +112,18 @@
   }
 
   /* ---------- 待办 ---------- */
+  function bindGlassControl() {
+    const slider = $id('borderAlpha');
+    const val = $id('borderAlphaVal');
+    if (!slider) return;
+    const apply = (v) => {
+      document.documentElement.style.setProperty('--frame-border-alpha', String(v));
+      if (val) val.textContent = Math.round(v * 100) + '%';
+    };
+    slider.addEventListener('input', () => apply(parseFloat(slider.value)));
+    apply(parseFloat(slider.value) || 0.35); // 初始同步
+  }
+
   function bindTodo() {
     $id('createForm').addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -245,6 +257,7 @@
     spawnPetals();
     bindAuth();
     bindTodo();
+    bindGlassControl();
     if (api.getToken()) {
       enterTodo();
     } else {
