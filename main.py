@@ -1,5 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from sqlalchemy.exc import SQLAlchemyError
 
 from routers.todo import router as todo_router
@@ -26,6 +28,13 @@ app.middleware("http")(log_middleware)
 # 注册路由
 app.include_router(auth_router)
 app.include_router(todo_router)
+
+# 静态资源（前端页面）——挂载在 API 路由之后，不影响 /auth、/todo、/docs
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+@app.get("/", include_in_schema=False)
+async def index():
+    return FileResponse("static/index.html")
 
 # 业务异常
 @app.exception_handler(BizException)

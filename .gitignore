@@ -22,3 +22,6 @@ ENV/
 *.log
 .pip_tmp/
 alembic/versions/*.pyc
+
+# 原始参考素材（应用使用 static/images/ 下的副本，避免重复提交大二进制）
+图片/

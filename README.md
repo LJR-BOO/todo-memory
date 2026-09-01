@@ -9,6 +9,7 @@
 - 迁移工具：Alembic
 - 容器化：Docker & Docker Compose
 - 认证：JWT (python-jose) + bcrypt（直接使用 `bcrypt` 库，不再依赖已停止维护的 passlib）
+- 前端：原神风格页面（原生 HTML/CSS/JS，由 FastAPI 直接托管，无需构建工具）
 
 ## 功能
 - 用户注册 / 登录（JWT 认证）
@@ -17,6 +18,7 @@
 - 用户数据隔离（每个用户只能看到自己的待办）
 - 全局异常处理、请求日志中间件
 - 统一响应格式 `{code, msg, data}`
+- 原神风格前端页面（登录/注册 + 待办管理，米白+金+靛蓝配色，角色立绘装饰）
 
 ## 项目结构
 ```
@@ -64,6 +66,13 @@ uvicorn main:app --reload --port 8000
 ```
 
 访问接口文档：http://127.0.0.1:8000/docs
+访问前端页面：http://127.0.0.1:8000/
+
+## 前端页面（原神风格）
+- 纯原生 HTML/CSS/JS，由 FastAPI 直接托管（`static/` 目录），**无需构建工具**。
+- 页面：登录/注册 + 待办管理（增删改查、分页、完成勾选、清空）。
+- 素材：`static/images/` 下的原神角色图（横幅、立绘、头像），配色为"米白 + 金 + 靛蓝"。
+- 登录接口用表单提交、注册用 JSON；登录后 token 存于 `localStorage`，请求自动携带 `Authorization: Bearer`。
 
 ## Docker Compose 一键部署
 ```bash
