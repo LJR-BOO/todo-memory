@@ -10,7 +10,7 @@
   --muted: #b08ba6;
   --blue: #b89bec;         /* 淡紫 链接 */
   --danger: #e57c9a;
-  --card: rgba(255, 255, 255, 0.2);
+  --card: rgba(255, 255, 255, 0.08);
   --shadow: 0 10px 30px rgba(255, 158, 196, 0.16);
   --radius: 20px;
   /* 磨砂玻璃边框透明度（0 隐形 ~ 0.8 明显），由底部滑块实时调节 */
@@ -32,7 +32,7 @@ body {
 /* 登录页背景图（暖金棕调，贴合 login_bg.jpg 的 #B19160 主色） */
 body.bg-login {
   background:
-    linear-gradient(160deg, rgba(255, 247, 235, 0.6) 0%, rgba(253, 236, 213, 0.38) 45%, rgba(248, 231, 214, 0.55) 100%),
+    linear-gradient(160deg, rgba(255, 247, 235, 0.35) 0%, rgba(253, 236, 213, 0.2) 45%, rgba(248, 231, 214, 0.3) 100%),
     url("/static/images/login_bg.jpg") center/cover fixed no-repeat;
   /* 登录主题色 —— 温暖金棕 */
   --gold: #c99a5b;
@@ -43,13 +43,13 @@ body.bg-login {
   --muted: #9c8870;
   --blue: #8a6f45;
   --danger: #c98a6a;
-  --card: rgba(255, 251, 242, 0.2);
+  --card: rgba(255, 251, 242, 0.08);
   --shadow: 0 10px 30px rgba(150, 110, 60, 0.12);
 }
 /* 登录后（待办页）背景图 —— 柔和茶绿，贴合 todo_bg.jpg 的 #AAB794 主色 */
 body.bg-todo {
   background:
-    linear-gradient(160deg, rgba(245, 248, 239, 0.6) 0%, rgba(236, 244, 228, 0.38) 45%, rgba(240, 247, 235, 0.55) 100%),
+    linear-gradient(160deg, rgba(245, 248, 239, 0.35) 0%, rgba(236, 244, 228, 0.2) 45%, rgba(240, 247, 235, 0.3) 100%),
     url("/static/images/todo_bg.jpg") center/cover fixed no-repeat;
   --gold: #8fb08a;
   --gold-deep: #6f9368;
@@ -59,7 +59,7 @@ body.bg-todo {
   --muted: #8a9378;
   --blue: #767f5d;
   --danger: #c19a77;
-  --card: rgba(251, 251, 244, 0.2);
+  --card: rgba(251, 251, 244, 0.08);
   --shadow: 0 10px 30px rgba(110, 130, 100, 0.12);
 }
 
@@ -137,8 +137,9 @@ a:hover { text-decoration: underline; }
   border: 1px solid rgb(255 255 255 / var(--frame-border-alpha));
   border-radius: var(--radius);
   box-shadow: none;
-  backdrop-filter: blur(16px) saturate(1.25);
-  -webkit-backdrop-filter: blur(16px) saturate(1.25);
+  /* 弱模糊（≤5px），让背景图清晰透出，而不是糊成一片 */
+  backdrop-filter: blur(4px) saturate(1.1);
+  -webkit-backdrop-filter: blur(4px) saturate(1.1);
 }
 
 /* ---------- 认证视图 ---------- */
@@ -161,11 +162,11 @@ a:hover { text-decoration: underline; }
 .field-label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
 .input, .field input {
   width: 100%; padding: 11px 14px; font-size: 15px;
-  /* 半透明毛玻璃：边框透明度可调（底部滑块），能透出背景动漫图；聚焦时浮现金色边框 */
+  /* 半透明毛玻璃：边框透明度可调（底部滑块），能清晰透出背景动漫图；聚焦时浮现金色边框 */
   border: 1px solid rgb(255 255 255 / var(--frame-border-alpha)); border-radius: 10px;
-  background: rgba(255, 255, 255, 0.4); color: var(--ink); outline: none;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.12); color: var(--ink); outline: none;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
   transition: border-color .2s, box-shadow .2s;
 }
 .input:focus, .field input:focus {
