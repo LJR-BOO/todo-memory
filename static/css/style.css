@@ -124,17 +124,17 @@ a:hover { text-decoration: underline; }
   color: var(--ink-strong);
 }
 .footer-img {
-  max-width: 420px; width: 92%; height: auto;
+  max-width: 260px; width: 90%; height: auto;
   opacity: 0.95;
 }
 
 /* ---------- 卡片 ---------- */
 .card {
   background: var(--card);
-  /* 边框透明，让背景图直接透出；靠磨砂模糊+阴影界定卡片 */
+  /* 边框透明 + 去阴影，让背景图直接透出；仅靠磨砂模糊界定卡片 */
   border: 1px solid transparent;
   border-radius: var(--radius);
-  box-shadow: var(--shadow);
+  box-shadow: none;
   backdrop-filter: blur(16px) saturate(1.25);
   -webkit-backdrop-filter: blur(16px) saturate(1.25);
 }
@@ -159,8 +159,9 @@ a:hover { text-decoration: underline; }
 .field-label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; }
 .input, .field input {
   width: 100%; padding: 11px 14px; font-size: 15px;
-  border: 1px solid var(--gold-border); border-radius: 10px;
-  background: rgba(255,255,255,0.55); color: var(--ink); outline: none;
+  /* 边框透明，让背景图透出；聚焦时才出现边框 */
+  border: 1px solid transparent; border-radius: 10px;
+  background: rgba(255,255,255,0.35); color: var(--ink); outline: none;
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   transition: border-color .2s, box-shadow .2s;
